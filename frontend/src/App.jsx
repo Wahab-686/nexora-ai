@@ -12,12 +12,14 @@ import GmailAutomation from "./pages/GmailAutomation";
 import Automations from "./pages/Automations";
 import Integrations from "./pages/Integrations";
 import Settings from "./pages/Settings";
+import Auth from "./pages/Auth.jsx";
 
 import MainLayout from "./layouts/MainLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+function DashboardRoutes() {
   return (
-    <BrowserRouter>
+    <ProtectedRoute>
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -34,6 +36,17 @@ function App() {
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </MainLayout>
+    </ProtectedRoute>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth" element={<Auth />} />
+        <Route path="*" element={<DashboardRoutes />} />
+      </Routes>
     </BrowserRouter>
   );
 }
