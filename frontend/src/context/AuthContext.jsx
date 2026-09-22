@@ -47,6 +47,13 @@ export function AuthProvider({ children }) {
     return sendPasswordResetEmail(auth, email);
   }
 
+  async function getIdToken() {
+    if (!user) {
+      throw new Error("User is not signed in.");
+    }
+    return user.getIdToken();
+  }
+
   const value = {
     user,
     loading,
@@ -55,6 +62,7 @@ export function AuthProvider({ children }) {
     loginWithGoogle,
     logout,
     resetPassword,
+    getIdToken
   };
 
   return (

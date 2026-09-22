@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const { signup, login, loginWithGoogle, resetPassword } = useAuth();
@@ -10,6 +11,7 @@ export default function Auth() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,10 +23,10 @@ export default function Auth() {
     try {
       if (mode === "signup") {
         await signup(email, password);
-        setMessage("Account created successfully.");
+        navigate("/");
       } else {
         await login(email, password);
-        setMessage("Signed in successfully.");
+        navigate("/");
       }
     } catch (err) {
       setError(err.message);
@@ -40,7 +42,7 @@ export default function Auth() {
 
     try {
       await loginWithGoogle();
-      setMessage("Signed in with Google.");
+      navigate("/");
     } catch (err) {
       setError(err.message);
     } finally {
