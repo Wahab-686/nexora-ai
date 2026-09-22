@@ -23,7 +23,7 @@ export default function Auth() {
     try {
       if (mode === "signup") {
         await signup(email, password);
-        navigate("/dashboard", { replace: true });
+        navigate("/onboarding", { replace: true });
       } else {
         await login(email, password);
         navigate("/dashboard", { replace: true });

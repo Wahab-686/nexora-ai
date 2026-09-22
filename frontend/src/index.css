@@ -158,3 +158,132 @@ button {
     transform: rotate(360deg);
   }
 }
+
+.onboarding-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 35%, #1e293b 0%, #0f172a 45%, #020617 100%);
+  color: #ffffff;
+}
+
+.onboarding-card {
+  width: min(720px, 100%);
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.82);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+}
+
+.onboarding-content {
+  text-align: center;
+}
+
+.onboarding-step {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.onboarding-content h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.onboarding-content p {
+  max-width: 560px;
+  margin: 20px auto 0;
+  color: #94a3b8;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.onboarding-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 36px 0;
+}
+
+.onboarding-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #475569;
+  transition: all 0.2s ease;
+}
+
+.onboarding-dot.active {
+  width: 24px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.onboarding-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.onboarding-actions button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.onboarding-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.onboarding-back {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.onboarding-next {
+  background: #ffffff;
+  color: #020617;
+}
+
+@media (max-width: 640px) {
+  .onboarding-screen {
+    padding: 16px;
+  }
+
+  .onboarding-card {
+    min-height: 500px;
+    padding: 32px 24px;
+    border-radius: 22px;
+  }
+
+  .onboarding-actions {
+    justify-content: stretch;
+  }
+
+  .onboarding-actions button {
+    flex: 1;
+  }
+}

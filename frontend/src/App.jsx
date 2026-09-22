@@ -14,6 +14,7 @@ import Integrations from "./pages/Integrations";
 import Settings from "./pages/Settings";
 import Auth from "./pages/Auth.jsx";
 import Splash from "./pages/Splash";
+import Onboarding from "./pages/Onboarding";
 
 import MainLayout from "./layouts/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -46,6 +47,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/auth" element={<Auth />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/" element={<Splash />} />
         <Route path="*" element={<DashboardRoutes />} />
       </Routes>
