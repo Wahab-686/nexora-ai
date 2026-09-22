@@ -23,10 +23,10 @@ export default function Auth() {
     try {
       if (mode === "signup") {
         await signup(email, password);
-        navigate("/");
+        navigate("/dashboard", { replace: true });
       } else {
         await login(email, password);
-        navigate("/");
+        navigate("/dashboard", { replace: true });
       }
     } catch (err) {
       setError(err.message);
@@ -42,7 +42,7 @@ export default function Auth() {
 
     try {
       await loginWithGoogle();
-      navigate("/");
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {

@@ -115,3 +115,46 @@ button {
 .page-content {
   width: 100%;
 }
+
+.splash-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 40%, #1e293b 0%, #0f172a 45%, #020617 100%);
+  color: #ffffff;
+}
+
+.splash-content {
+  text-align: center;
+}
+
+.splash-content h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.splash-content p {
+  margin-top: 0.75rem;
+  color: #94a3b8;
+  font-size: 1.05rem;
+}
+
+.splash-loader {
+  width: 42px;
+  height: 42px;
+  margin: 2rem auto 0;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: nexora-spin 0.9s linear infinite;
+}
+
+@keyframes nexora-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

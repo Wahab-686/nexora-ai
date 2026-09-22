@@ -13,6 +13,7 @@ import Automations from "./pages/Automations";
 import Integrations from "./pages/Integrations";
 import Settings from "./pages/Settings";
 import Auth from "./pages/Auth.jsx";
+import Splash from "./pages/Splash";
 
 import MainLayout from "./layouts/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -22,7 +23,7 @@ function DashboardRoutes() {
     <ProtectedRoute>
       <MainLayout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Home />} />
           <Route path="/lead-generator" element={<LeadGenerator />} />
           <Route path="/leads" element={<Leads />} />
           <Route path="/tickets" element={<Tickets />} />
@@ -45,6 +46,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={<Splash />} />
         <Route path="*" element={<DashboardRoutes />} />
       </Routes>
     </BrowserRouter>
