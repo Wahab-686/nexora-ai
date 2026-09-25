@@ -1,54 +1,83 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
+import { apiGet } from "../services/api";
 
 function Home() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, getIdToken } = useAuth();
+
+  const [dashboardData, setDashboardData] = useState(null);
+  const [dashboardLoading, setDashboardLoading] = useState(true);
+  const [dashboardError, setDashboardError] = useState("");
 
   const displayName =
     user?.displayName || user?.email?.split("@")[0] || "there";
 
+  useEffect(() => {
+    async function loadDashboard() {
+      try {
+        setDashboardLoading(true);
+        setDashboardError("");
+
+        const data = await apiGet(
+          "/api/v1/dashboard/summary",
+          getIdToken
+        );
+
+        setDashboardData(data);
+      } catch (error) {
+        console.error("Dashboard API error:", error);
+        setDashboardError(
+          error.message || "Unable to load dashboard data."
+        );
+      } finally {
+        setDashboardLoading(false);
+      }
+    }
+
+    if (user) {
+      loadDashboard();
+    }
+  }, [user, getIdToken]);
+
   const metrics = [
     {
       label: "Total Leads",
-      value: "0",
+      value: dashboardLoading
+        ? "..."
+        : dashboardData?.metrics?.total_leads ?? 0,
       description: "Potential customers",
     },
     {
       label: "Active Bookings",
-      value: "0",
+      value: dashboardLoading
+        ? "..."
+        : dashboardData?.metrics?.active_bookings ?? 0,
       description: "Upcoming appointments",
     },
     {
       label: "Messages",
-      value: "0",
+      value: dashboardLoading
+        ? "..."
+        : dashboardData?.metrics?.messages ?? 0,
       description: "AI-assisted conversations",
     },
     {
       label: "Automations",
-      value: "0",
+      value: dashboardLoading
+        ? "..."
+        : dashboardData?.metrics?.automations ?? 0,
       description: "Active workflows",
     },
   ];
 
   const agents = [
-    {
-      name: "Lead Generation Agent",
-      status: "Ready",
-    },
-    {
-      name: "Gmail Communication Agent",
-      status: "Ready",
-    },
-    {
-      name: "Booking AI Agent",
-      status: "Ready",
-    },
-    {
-      name: "Support AI Agent",
-      status: "Ready",
-    },
+    { name: "Lead Generation Agent", status: "Ready" },
+    { name: "Gmail Communication Agent", status: "Ready" },
+    { name: "Booking AI Agent", status: "Ready" },
+    { name: "Support AI Agent", status: "Ready" },
   ];
 
   const activities = [
@@ -79,11 +108,26 @@ function Home() {
         </div>
       </section>
 
+      {dashboardError && (
+        <section className="dashboard-panel">
+          <div className="panel-header">
+            <div>
+              <span className="panel-eyebrow">DASHBOARD</span>
+              <h2>Unable to load live data</h2>
+            </div>
+          </div>
+
+          <p>{dashboardError}</p>
+        </section>
+      )}
+
       <section className="dashboard-metrics">
         {metrics.map((metric) => (
           <article className="metric-card" key={metric.label}>
             <span>{metric.label}</span>
+
             <strong>{metric.value}</strong>
+
             <p>{metric.description}</p>
           </article>
         ))}
