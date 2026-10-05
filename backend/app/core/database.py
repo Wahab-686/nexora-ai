@@ -1,4 +1,11 @@
-from typing import Final
+from supabase import Client, create_client
+
+from app.core.config import settings
 
 
-DATABASE_STATUS: Final[str] = "not_configured"
+supabase: Client = create_client(
+    settings.supabase_url,
+    settings.supabase_key,
+)
+
+DATABASE_STATUS = "configured"

@@ -7,10 +7,13 @@ class Settings(BaseSettings):
     debug: bool = True
     frontend_url: str = "http://localhost:5173"
 
+    supabase_url: str
+    supabase_key: str
+
     model_config = SettingsConfigDict(
-        env_file = ".env",
-        env_file_encoding = "utf-8",
-        extra = "ignore"
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
     )
 
 
