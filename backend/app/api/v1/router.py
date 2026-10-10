@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from app.api.v1.routes import agents
 
 from app.api.v1.routes.health import router as health_router
 from app.api.v1.routes import dashboard
@@ -18,4 +19,10 @@ api_router.include_router(
     leads.router,
     prefix="/leads",
     tags=["Leads"],
+)
+
+api_router.include_router(
+    agents.router,
+    prefix="/agents",
+    tags=["Agents"],
 )
